@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LandingRouteComponent } from './pages/landing-route/landing-route.component';
+import { LoginRouteComponent } from './pages/login-route/login-route.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: LandingRouteComponent,
+    component: LoginRouteComponent,
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AboutRoutingModule { }
+export class LoginRoutingModule { }

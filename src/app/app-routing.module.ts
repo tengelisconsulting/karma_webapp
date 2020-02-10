@@ -5,21 +5,11 @@ import { LayoutComponent } from './layout/layout.component';
 
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/auth/login',
-  //   pathMatch: 'full'
-  // },
   {
     path: "",
     component: LayoutComponent,
     // canActivate: [NoAuthGuard],
     children: [
-      {
-        path: "",
-        redirectTo: AppRoutePath.LANDING,
-        pathMatch: "full",
-      },
       {
         path: AppRoutePath.LANDING,
         loadChildren: () => import('./modules/landing/landing.module')
@@ -27,15 +17,12 @@ const routes: Routes = [
       },
     ]
   },
-  // {
-  //   path: 'login',
-  //   component: LoginRouteComponent,
-  //   loadChildren: () =>
-  //     import('@modules/login/login.module').then(m => m.LoginModule)
-  // },
-  // Fallback when no prior routes is matched
-  { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
-
+  {
+    path: AppRoutePath.LOGIN,
+    loadChildren: () => import('./modules/login/login.module')
+      .then((m) => m.LoginModule)
+  },
+  { path: '**', redirectTo: AppRoutePath.LANDING, pathMatch: 'full' }
 ];
 
 @NgModule({
