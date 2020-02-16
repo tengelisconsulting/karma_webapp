@@ -1,1 +1,29 @@
-<p>login-route works!</p>
+<div class="example-container">
+
+  <mat-form-field
+    appearance="fill"
+    class="w-100">
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      type="text"
+      [formControl]="usernameFC"/>
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="fill"
+    class="w-100">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      [formControl]="passwordFC"/>
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    (click)="login()">
+    Login
+  </button>
+
+</div>
