@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppLoadService } from './core/service/app-load.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'karma-webapp';
+  public title = 'karma-webapp';
+
+  constructor(
+    private appLoad: AppLoadService,
+  ) {
+    this.init();
+  }
+
+  private async init(): Promise<void> {
+    await this.appLoad.startup();
+  }
+
 }

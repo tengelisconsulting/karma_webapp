@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutePath } from './core/routing/AppRoutePath';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthGuard } from './core/routing/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: "",
+    path: AppRoutePath.APP_PREFIX,
     component: LayoutComponent,
-    // canActivate: [NoAuthGuard],
+    canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: AppRoutePath.LANDING, pathMatch: 'full' },
       {
         path: AppRoutePath.LANDING,
         loadChildren: () => import('./modules/landing/landing.module')
@@ -22,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/login/login.module')
       .then((m) => m.LoginModule)
   },
-  { path: '**', redirectTo: AppRoutePath.LANDING, pathMatch: 'full' }
+  { path: '**', redirectTo: AppRoutePath.LOGIN, pathMatch: 'full' }
 ];
 
 @NgModule({
