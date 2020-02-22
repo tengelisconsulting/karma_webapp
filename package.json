@@ -2,9 +2,10 @@
   "name": "karma-webapp",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
+    "ng": "ng",
+    "prod": "ng build --prod",
+    "serve": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

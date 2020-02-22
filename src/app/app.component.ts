@@ -16,7 +16,7 @@ export class AppComponent {
   }
 
   private async init(): Promise<void> {
-    await this.appLoad.startup();
+    await this.appLoad.startupAttemptOnAppLoad();
   }
 
 }

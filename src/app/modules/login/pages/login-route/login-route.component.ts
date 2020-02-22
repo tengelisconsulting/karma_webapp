@@ -1,29 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AppLoadService } from 'src/app/core/service/app-load.service';
+
 
 @Component({
   selector: 'app-login-route',
   templateUrl: './login-route.component.html',
   styleUrls: ['./login-route.component.css']
 })
-export class LoginRouteComponent implements OnInit {
+export class LoginRouteComponent {
 
-  public usernameFC: FormControl = new FormControl("");
-  public passwordFC: FormControl = new FormControl("");
+  public loginForm: FormGroup = new FormGroup({
+    username: new FormControl("", [
+      Validators.required,
+    ]),
+    password: new FormControl("", [
+      Validators.required,
+    ]),
+  });
+
+  public errorMsg: string;
 
   constructor(
-    private authService: AuthService,
+    private appLoad: AppLoadService,
   ) { }
 
-  ngOnInit() {
-  }
-
-  public login(): void {
-    this.authService.authenticate(
-      this.usernameFC.value,
-      this.passwordFC.value
+  public async login(): Promise<void> {
+    this.errorMsg = null;
+    if (!this.loginForm.valid) {
+      return;
+    }
+    this.loginForm.disable();
+    // this.usernameFC.disable();
+    // this.passwordFC.disable();
+    const success = await this.appLoad.startupFromLogin(
+      this.loginForm.value.username,
+      this.loginForm.value.password
     );
+    this.loginForm.enable();
+    if (!success) {
+      this.errorMsg = "Invalid username or password";
+    }
   }
 
 }

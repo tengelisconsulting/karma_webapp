@@ -24,6 +24,9 @@ export class AuthService {
         password: password,
       },
     });
+    if (!authRes.ok) {
+      return null;
+    }
     const token = await authRes.json();
     console.debug("authentication success, received token: ", token);
     return token;
@@ -34,11 +37,12 @@ export class AuthService {
       method: "POST",
       path: "/auth/session/refresh",
     });
-    if (res.ok) {
-      const token = await res.json();
-      return token;
+    if (!res.ok) {
+      return null;
     }
-    return null;
+    const token = await res.json();
+    console.debug("session renew success, received token: ", token);
+    return token;
   }
 
   // public async checkSessionActive(): Promise<boolean> {

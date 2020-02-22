@@ -1,29 +1,41 @@
-<div class="example-container">
+<div>
 
-  <mat-form-field
-    appearance="fill"
-    class="w-100">
-    <mat-label>Username</mat-label>
-    <input
-      matInput
-      type="text"
-      [formControl]="usernameFC"/>
-  </mat-form-field>
+  <form
+    class="container"
+    [formGroup]="loginForm"
+    (ngSubmit)="login()">
 
-  <mat-form-field
-    appearance="fill"
-    class="w-100">
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      type="password"
-      [formControl]="passwordFC"/>
-  </mat-form-field>
+    <div *ngIf="errorMsg"
+         class="error-msg">
+      {{ errorMsg }}
+    </div>
+    
+    <mat-form-field
+      appearance="fill"
+      class="w-100">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="username" />
+    </mat-form-field>
 
-  <button
-    mat-flat-button
-    (click)="login()">
-    Login
-  </button>
+    <mat-form-field
+      appearance="fill"
+      class="w-100">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"/>
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-flat-button>
+      Login
+    </button>
+  </form>
+
 
 </div>
