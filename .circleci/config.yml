@@ -4,11 +4,7 @@ jobs:
    machine: true
    steps:
      - checkout
-     # build the application image
-     - run: echo "${HEROKU_API_KEY}"
      - run: docker login --username=liam@tengelisconsulting.com --password=${HEROKU_API_KEY} registry.heroku.com
      - run: docker build -t registry.heroku.com/karma-webapp-canary/web .
      - run: docker push registry.heroku.com/karma-webapp-canary/web
-
-     # deploy the image
-     # - run: docker push company/app:$CIRCLE_BRANCH
+     - run: ./deploy-heroku.sh
