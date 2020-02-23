@@ -1,0 +1,8 @@
+# Builds + pushes
+heroku container:push web --app blooming-crag-21545
+
+# Deploys
+heroku container:release web -a blooming-crag-21545
+
+# logs
+heroku logs --tail
