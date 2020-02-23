@@ -18,3 +18,5 @@ FROM nginx:1.17-alpine
 WORKDIR /app
 COPY --from=0 /app/dist/karma-webapp ./dist
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf && nginx -g 'daemon off;'
