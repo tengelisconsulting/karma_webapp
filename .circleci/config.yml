@@ -7,4 +7,4 @@ jobs:
      - run: docker login --username=liam@tengelisconsulting.com --password=${HEROKU_API_KEY} registry.heroku.com
      - run: docker build -t registry.heroku.com/karma-webapp-canary/web .
      - run: docker push registry.heroku.com/karma-webapp-canary/web
-     - run: pwd && ls
+     - run: ./bin/deploy-heroku.sh karma-webapp-canary
