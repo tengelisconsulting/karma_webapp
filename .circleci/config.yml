@@ -5,6 +5,6 @@ jobs:
    steps:
      - checkout
      - run: docker login --username=liam@tengelisconsulting.com --password=${HEROKU_API_KEY} registry.heroku.com
-     - run: docker build -t registry.heroku.com/karma-webapp-canary/web .
-     - run: docker push registry.heroku.com/karma-webapp-canary/web
-     - run: ./bin/deploy-heroku.sh karma-webapp-canary
+     - run: docker build -t registry.heroku.com/karma-webapp-canary/web:${CIRCLE_SHA1} .
+     - run: docker push registry.heroku.com/karma-webapp-canary/web:${CIRCLE_SHA1}
+     - run: ./bin/deploy-heroku.sh karma-webapp-canary "${CIRCLE_SHA1}"
